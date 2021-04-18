@@ -1,7 +1,7 @@
 import argparse
 
 from simple_agent import RandomAgent, ForwardOnlyAgent
-from rl_agent import SACAgent
+#from rl_agent import SACAgent
 from trained_agent import TrainedAgent
 
 from gibson2.challenge.challenge import Challenge
