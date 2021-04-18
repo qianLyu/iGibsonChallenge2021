@@ -20,7 +20,7 @@ def get_agent(agent_class, ckpt_path=""):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--agent-class", type=str, default="Random", choices=["Random", "ForwardOnly", "SAC"])
+    parser.add_argument("--agent-class", type=str, default="Random", choices=["Random", "ForwardOnly", "SAC", "Trained"])
     parser.add_argument("--ckpt-path", default="", type=str)
 
     args = parser.parse_args()
