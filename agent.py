@@ -2,6 +2,7 @@ import argparse
 
 from simple_agent import RandomAgent, ForwardOnlyAgent
 from rl_agent import SACAgent
+from trained_agent import TrainedAgent
 
 from gibson2.challenge.challenge import Challenge
 
@@ -13,6 +14,8 @@ def get_agent(agent_class, ckpt_path=""):
         return ForwardOnlyAgent()
     elif agent_class == "SAC":
         return SACAgent(root_dir=ckpt_path)
+    elif agent_class == "Trained":
+        return TrainedAgent()
 
 
 def main():
