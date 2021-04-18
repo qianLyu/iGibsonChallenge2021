@@ -10,7 +10,7 @@ from gibson2.sensors.scan_sensor import ScanSensor
 from gibson2.sensors.vision_sensor import VisionSensor
 from gibson2.robots.robot_base import BaseRobot
 from gibson2.external.pybullet_tools.utils import stable_z_on_aabb
-from gibson2.sensors.bump_sensor import BumpSensor
+#from gibson2.sensors.bump_sensor import BumpSensor
 
 from transforms3d.euler import euler2quat
 from collections import OrderedDict
