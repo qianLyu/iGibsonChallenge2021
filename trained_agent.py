@@ -41,7 +41,7 @@ import yaml
 DEVICE = torch.device("cuda")
 
 # WEIGHTS_PATH = 'habitat_cont_2/habitat_cont/gaussian_noslide_30deg_63_skyfail.json'
-WEIGHTS_PATH = '/coc/pskynet3/nyokoyama3/aug26/hablabhotswap/gaussian_noslide_30deg_63_skyfail.json'
+WEIGHTS_PATH = '/nethome/qluo49/iGibsonChallenge2021/gaussian_noslide_30deg_63_skyfail.json'
 
 def load_model(weights_path, dim_actions): # DON'T CHANGE
     depth_256_space = SpaceDict({
@@ -123,6 +123,7 @@ class TrainedAgent:
     def act(self, observations):
         self.state = OrderedDict()
         self.state['depth'] = observations['depth']
+        print(self.state['depth'].get_shape())
         self.state['pointgoal_with_gps_compass'] = observations['task_obs'][:2]
         self.state = [self.state]
         batch = defaultdict(list)
