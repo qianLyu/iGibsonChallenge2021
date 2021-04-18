@@ -121,6 +121,7 @@ class TrainedAgent:
         pass
 
     def act(self, observations):
+        self.state = OrderedDict()
         self.state['depth'] = observations['depth']
         self.state['pointgoal_with_gps_compass'] = observations['task_obs'][:2]
         self.state = [self.state]
