@@ -97,7 +97,7 @@ def to_tensor(v): # DON'T CHANGE
     else:
         return torch.tensor(v, dtype=torch.float)
 
-def observations_to_image(observation: Dict) -> np.ndarray:
+def observations_to_image(observation):
 
     egocentric_view = []
     # if "rgb" in observation:
