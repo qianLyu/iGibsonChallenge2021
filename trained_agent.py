@@ -123,7 +123,6 @@ class TrainedAgent:
     def act(self, observations):
         self.state = OrderedDict()
         self.state['depth'] = observations['depth']
-        print(self.state['depth'].shape())
         self.state['pointgoal_with_gps_compass'] = observations['task_obs'][:2]
         self.state = [self.state]
         batch = defaultdict(list)
