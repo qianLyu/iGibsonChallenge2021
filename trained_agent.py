@@ -40,6 +40,9 @@ import subprocess
 import yaml
 DEVICE = torch.device("cuda")
 
+import matplotlib.image as mp
+
+
 # WEIGHTS_PATH = 'habitat_cont_2/habitat_cont/gaussian_noslide_30deg_63_skyfail.json'
 WEIGHTS_PATH = '/nethome/qluo49/iGibsonChallenge2021/gaussian_noslide_30deg_63_skyfail.json'
 
@@ -94,11 +97,32 @@ def to_tensor(v): # DON'T CHANGE
     else:
         return torch.tensor(v, dtype=torch.float)
 
+def observations_to_image(observation: Dict) -> np.ndarray:
+
+    egocentric_view = []
+    # if "rgb" in observation:
+    #     observation_size = observation["rgb"].shape[0]
+    #     egocentric_view.append(observation["rgb"][:, :, :3])
+
+    if "depth" in observation:
+        observation_size = observation["depth"].shape[0]
+        depth_map = (observation["depth"].squeeze() * 255).astype(np.uint8)
+        depth_map = np.stack([depth_map for _ in range(3)], axis=2)
+        egocentric_view.append(depth_map)
+
+    egocentric_view = np.concatenate(egocentric_view, axis=1)
+
+    frame = egocentric_view
+
+    return frame
+
 ACTION_DIM = 2
 LINEAR_VEL_DIM = 0
 ANGULAR_VEL_DIM = 1
 
 num_processes = 1
+
+index = 0
 
 class TrainedAgent:
     def __init__(self):
@@ -116,6 +140,7 @@ class TrainedAgent:
         )
         self.prev_actions = torch.zeros(num_processes, 2, device=DEVICE)
         self.not_done_masks = torch.zeros(num_processes, 1, device=DEVICE)
+        self.index = index
 
     def reset(self):
         pass
@@ -125,6 +150,12 @@ class TrainedAgent:
         self.state['depth'] = observations['depth']
         self.state['pointgoal_with_gps_compass'] = observations['task_obs'][:2]
         self.state = [self.state]
+
+        self.index += 1
+        frame = observations_to_image(self.state[0])
+        root = f'/nethome/qluo49/iGibsonChallenge2021/pictures/{self.index}.png'
+        mp.imsave(root,frame)
+
         batch = defaultdict(list)
         #print(state)
         for obs in self.state:
