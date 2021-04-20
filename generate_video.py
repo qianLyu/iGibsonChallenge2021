@@ -50,7 +50,7 @@ def Pic2Video():
     images = os.listdir(imgPath)
     fps = 15  
  
-    fourcc = VideoWriter_fourcc(*"PNG")
+    fourcc = VideoWriter_fourcc(*"mp4v")
  
     image = Image.open(imgPath + images[0])
     videoWriter = cv2.VideoWriter(videoPath, fourcc, fps, image.size)
