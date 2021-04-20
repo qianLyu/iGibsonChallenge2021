@@ -100,15 +100,15 @@ def to_tensor(v): # DON'T CHANGE
 def observations_to_image(observation):
 
     egocentric_view = []
-    # if "rgb" in observation:
-    #     observation_size = observation["rgb"].shape[0]
-    #     egocentric_view.append(observation["rgb"][:, :, :3])
+    if "rgb" in observation:
+        observation_size = observation["rgb"].shape[0]
+        egocentric_view.append(observation["rgb"][:, :, :3])
 
-    if "depth" in observation:
-        observation_size = observation["depth"].shape[0]
-        depth_map = (observation["depth"].squeeze() * 255).astype(np.uint8)
-        depth_map = np.stack([depth_map for _ in range(3)], axis=2)
-        egocentric_view.append(depth_map)
+    # if "depth" in observation:
+    #     observation_size = observation["depth"].shape[0]
+    #     depth_map = (observation["depth"].squeeze() * 255).astype(np.uint8)
+    #     depth_map = np.stack([depth_map for _ in range(3)], axis=2)
+    #     egocentric_view.append(depth_map)
 
     egocentric_view = np.concatenate(egocentric_view, axis=1)
 
@@ -152,7 +152,7 @@ class TrainedAgent:
         self.state = [self.state]
 
         self.index += 1
-        frame = observations_to_image(self.state[0])
+        frame = observations_to_image(observations)
         root = f'/nethome/qluo49/iGibsonChallenge2021/pictures/{self.index}.png'
         mp.imsave(root,frame)
 
