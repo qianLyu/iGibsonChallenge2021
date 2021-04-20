@@ -55,7 +55,7 @@ def Pic2Video():
     image = Image.open(imgPath + images[0])
     videoWriter = cv2.VideoWriter(videoPath, fourcc, fps, image.size)
     for im_name in range(len(images)):
-        frame = cv2.imread(imgPath + images[im_name])  
+        frame = cv2.imread(imgPath + f'{im_name+1}.png')  
         print(im_name)
         videoWriter.write(frame)
 
