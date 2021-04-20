@@ -181,8 +181,8 @@ class TrainedAgent:
         move_amount = -torch.tanh(action[0][0]).item()
         turn_amount = torch.tanh(action[0][1]).item()
         move_amount = (move_amount+1.)/2.
-        # action1 = np.array([ 0.25 * move_amount, 0.16 * turn_amount])
-        action1 = np.array([ move_amount, turn_amount])
+        action1 = np.array([ 0.25 * move_amount, 0.16 * turn_amount])
+        #action1 = np.array([ move_amount, turn_amount])
 
         self.not_done_masks = torch.ones(num_processes, 1, device=DEVICE)
         return action1

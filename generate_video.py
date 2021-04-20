@@ -48,7 +48,7 @@ def Pic2Video():
     videoPath = '/nethome/qluo49/iGibsonChallenge2021/videos/social_nav.avi'  
  
     images = os.listdir(imgPath)
-    fps = 15  
+    fps = 10  
  
     fourcc = VideoWriter_fourcc(*"XVID")
  
