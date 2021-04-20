@@ -35,7 +35,7 @@ def images_to_video(
 
 frames = []
 for i in range(1, 10000):
-    frame = Image.open(f'/nethome/qluo49/iGibsonChallenge2021/pictures/{i}')
+    frame = Image.open(f'/nethome/qluo49/iGibsonChallenge2021/pictures/{i}.png')
     frames.append(frame)
 images_to_video(frames, '/nethome/qluo49/iGibsonChallenge2021/videos', 'social_nav')
 
