@@ -44,8 +44,8 @@ import os
 from PIL import Image
 
 def Pic2Video():
-    imgPath = f'/nethome/qluo49/iGibsonChallenge2021/pictures' 
-    videoPath = '/nethome/qluo49/iGibsonChallenge2021/videos'  
+    imgPath = f'/nethome/qluo49/iGibsonChallenge2021/pictures/' 
+    videoPath = '/nethome/qluo49/iGibsonChallenge2021/videos/'  
  
     images = os.listdir(imgPath)
     fps = 15  
