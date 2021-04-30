@@ -48,7 +48,7 @@ WEIGHTS_PATH = '/nethome/qluo49/iGibsonChallenge2021/ckpt.37.json'
 
 def load_model(weights_path, dim_actions): # DON'T CHANGE
     depth_256_space = SpaceDict({
-        'depth': spaces.Box(low=0., high=1., shape=(256,256,1)),
+        'depth': spaces.Box(low=0., high=1., shape=(320,180,1)),
         'pointgoal_with_gps_compass': spaces.Box(
             low=np.finfo(np.float32).min,
             high=np.finfo(np.float32).max,
