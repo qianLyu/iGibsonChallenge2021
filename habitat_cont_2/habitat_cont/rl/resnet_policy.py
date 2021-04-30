@@ -222,11 +222,21 @@ class PointNavResNetNet(Net):
             obs_transform=obs_transform,
         )
 
+        # if not self.visual_encoder.is_blind:
+        #     self.visual_fc = nn.Sequential(
+        #         Flatten(),
+        #         nn.Linear(
+        #             np.prod(self.visual_encoder.output_shape), hidden_size
+        #         ),
+        #         nn.ReLU(True),
+        #     )
+
         if not self.visual_encoder.is_blind:
             self.visual_fc = nn.Sequential(
-                Flatten(),
+                nn.Flatten(),
                 nn.Linear(
-                    np.prod(self.visual_encoder.output_shape), hidden_size
+                    7680, hidden_size
+                    # np.prod(self.visual_encoder.output_shape), hidden_size
                 ),
                 nn.ReLU(True),
             )

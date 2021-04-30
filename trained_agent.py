@@ -44,7 +44,7 @@ import matplotlib.image as mp
 
 
 # WEIGHTS_PATH = 'habitat_cont_2/habitat_cont/gaussian_noslide_30deg_63_skyfail.json'
-WEIGHTS_PATH = '/nethome/qluo49/iGibsonChallenge2021/gaussian_noslide_30deg_63_skyfail.json'
+WEIGHTS_PATH = '/nethome/qluo49/iGibsonChallenge2021/ckpt.37.json'
 
 def load_model(weights_path, dim_actions): # DON'T CHANGE
     depth_256_space = SpaceDict({
@@ -154,7 +154,7 @@ class TrainedAgent:
         self.index += 1
         frame = observations_to_image(observations)
         root = f'/nethome/qluo49/iGibsonChallenge2021/pictures/{self.index}.png'
-        mp.imsave(root,frame)
+        #mp.imsave(root,frame)
 
         batch = defaultdict(list)
         #print(state)
