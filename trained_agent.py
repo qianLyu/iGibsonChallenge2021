@@ -129,7 +129,7 @@ class TrainedAgent:
     def __init__(self):
         self.model = load_model(
             weights_path = WEIGHTS_PATH,
-            dim_actions = 1
+            dim_actions = 4
         )
         self.model = self.model.eval()
         self.state = OrderedDict()
