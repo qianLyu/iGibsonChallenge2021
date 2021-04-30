@@ -139,7 +139,7 @@ class TrainedAgent:
             512,
             device=DEVICE,
         )
-        self.prev_actions = torch.zeros(num_processes, 2, device=DEVICE)
+        self.prev_actions = torch.zeros(num_processes, 1, device=DEVICE)
         self.not_done_masks = torch.zeros(num_processes, 1, device=DEVICE)
         self.index = index
 
