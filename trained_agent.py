@@ -198,11 +198,11 @@ class TrainedAgent:
             move_amount, turn_amount = 0,0
             #print('[STOP HAS BEEN CALLED]')
         elif action_index == 1: # Move FWD
-            move_amount = max_linear_speed
+            move_amount = 0.25 * max_linear_speed
         elif action_index == 2: # LEFT
-            turn_amount = max_angular_speed
+            turn_amount = 0.25 * max_angular_speed
         else: # RIGHT
-            turn_amount = -max_angular_speed
+            turn_amount = -0.25 * max_angular_speed
 
         action1 = np.array([ move_amount, turn_amount])
 
