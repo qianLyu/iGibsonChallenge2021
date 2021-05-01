@@ -157,7 +157,7 @@ class TrainedAgent:
         self.index += 1
         frame = observations_to_image(observations)
         root = f'/nethome/qluo49/iGibsonChallenge2021/pictures/{self.index}.png'
-        #mp.imsave(root,frame)
+        mp.imsave(root,frame)
 
         batch = defaultdict(list)
         #print(state)
@@ -200,9 +200,9 @@ class TrainedAgent:
         elif action_index == 1: # Move FWD
             move_amount = max_linear_speed
         elif action_index == 2: # LEFT
-            turn_amount = 0.25 * max_angular_speed
+            turn_amount = max_angular_speed
         else: # RIGHT
-            turn_amount = -0.25 * max_angular_speed
+            turn_amount = max_angular_speed
 
         action1 = np.array([ move_amount, turn_amount])
 
