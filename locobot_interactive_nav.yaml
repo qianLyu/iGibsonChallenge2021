@@ -63,7 +63,7 @@ fisheye: false
 # vertical_fov: 42.5
 image_width: 320
 image_height: 180
-vertical_fov: 69.4
+vertical_fov: 42.5
 # depth
 depth_low : 0.1
 depth_high: 10.0
