@@ -192,8 +192,8 @@ class TrainedAgent:
         action = action.squeeze()
         action_index = action.item()
         move_amount, turn_amount = 0,0
-        max_linear_speed = 1.0
-        max_angular_speed = 1.0
+        max_linear_speed = 0.5 #1.0
+        max_angular_speed = 1/9 #1.0
         if action_index == 0: # STOP
             move_amount, turn_amount = 0,0
             #print('[STOP HAS BEEN CALLED]')
