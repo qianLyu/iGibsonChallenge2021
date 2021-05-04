@@ -169,17 +169,22 @@ class TrainedAgent:
             batch[sensor] = torch.stack(batch[sensor], dim=0).to(
                 device=DEVICE, dtype=torch.float
             )
-        with torch.no_grad():
-            # Get new action and LSTM hidden state
-            _, action, _, self.test_recurrent_hidden_states = self.model.act(
-                batch,
-                self.test_recurrent_hidden_states,
-                self.prev_actions,
-                self.not_done_masks,
-                deterministic=True,
-            )
 
-        self.prev_actions.copy_(action)
+        if self.index % 10 != 0:
+            action = self.prev_actions
+
+        else:
+            with torch.no_grad():
+                # Get new action and LSTM hidden state
+                _, action, _, self.test_recurrent_hidden_states = self.model.act(
+                    batch,
+                    self.test_recurrent_hidden_states,
+                    self.prev_actions,
+                    self.not_done_masks,
+                    deterministic=True,
+                )
+
+            self.prev_actions.copy_(action)
 
         # # gaussian action space
         # move_amount = -torch.tanh(action[0][0]).item()
