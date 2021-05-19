@@ -57,13 +57,13 @@ def load_model(weights_path, dim_actions): # DON'T CHANGE
         )
     })
 
-    # action_space = spaces.Box(
-    #     np.array([float('-inf'),float('-inf')]), np.array([float('inf'),float('inf')])
-    # )
-    # action_distribution = 'gaussian'
+    action_space = spaces.Box(
+        np.array([float('-inf'),float('-inf')]), np.array([float('inf'),float('inf')])
+    )
+    action_distribution = 'gaussian'
 
-    action_space = spaces.Discrete(4)
-    action_distribution = 'categorical'
+    # action_space = spaces.Discrete(4)
+    # action_distribution = 'categorical'
 
     model = PointNavResNetPolicy(
         observation_space=depth_256_space,
@@ -131,7 +131,7 @@ class TrainedAgent:
     def __init__(self):
         self.model = load_model(
             weights_path = WEIGHTS_PATH,
-            dim_actions = 4
+            dim_actions = 2 #4
         )
         self.model = self.model.eval()
         self.state = OrderedDict()
@@ -141,7 +141,7 @@ class TrainedAgent:
             512,
             device=DEVICE,
         )
-        self.prev_actions = torch.zeros(num_processes, 1, device=DEVICE)
+        self.prev_actions = torch.zeros(num_processes, 2, device=DEVICE)
         self.not_done_masks = torch.zeros(num_processes, 1, device=DEVICE)
         self.index = index
 
@@ -186,28 +186,28 @@ class TrainedAgent:
 
             self.prev_actions.copy_(action)
 
-        # # gaussian action space
-        # move_amount = -torch.tanh(action[0][0]).item()
-        # turn_amount = torch.tanh(action[0][1]).item()
-        # move_amount = (move_amount+1.)/2.
-        # #action1 = np.array([ 0.25 * move_amount, 0.16 * turn_amount])
-        # action1 = np.array([ move_amount, turn_amount])
+        # gaussian action space
+        move_amount = -torch.tanh(action[0][0]).item()
+        turn_amount = torch.tanh(action[0][1]).item()
+        move_amount = (move_amount+1.)/2.
+        #action1 = np.array([ 0.25 * move_amount, 0.16 * turn_amount])
+        action1 = np.array([ move_amount, turn_amount])
 
-        # continuous action space
-        action = action.squeeze()
-        action_index = action.item()
-        move_amount, turn_amount = 0,0
-        max_linear_speed = 0.5 #1.0
-        max_angular_speed = 1/9 #1.0
-        if action_index == 0: # STOP
-            move_amount, turn_amount = 0,0
-            #print('[STOP HAS BEEN CALLED]')
-        elif action_index == 1: # Move FWD
-            move_amount = max_linear_speed
-        elif action_index == 2: # LEFT
-            turn_amount = max_angular_speed
-        else: # RIGHT
-            turn_amount = - max_angular_speed
+        # # continuous action space
+        # action = action.squeeze()
+        # action_index = action.item()
+        # move_amount, turn_amount = 0,0
+        # max_linear_speed = 1.0 #0.5 #1.0
+        # max_angular_speed = 1.0 #1/9 #1.0
+        # if action_index == 0: # STOP
+        #     move_amount, turn_amount = 0,0
+        #     #print('[STOP HAS BEEN CALLED]')
+        # elif action_index == 1: # Move FWD
+        #     move_amount = max_linear_speed
+        # elif action_index == 2: # LEFT
+        #     turn_amount = max_angular_speed
+        # else: # RIGHT
+        #     turn_amount = - max_angular_speed
 
         action1 = np.array([ move_amount, turn_amount])
 
