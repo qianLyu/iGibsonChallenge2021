@@ -170,8 +170,8 @@ class TrainedAgent:
                 device=DEVICE, dtype=torch.float
             )
 
-        if self.index % 10 != 0:
-            action = self.prev_actions
+        # if self.index % 10 != 0:
+        #     action = self.prev_actions
 
         else:
             with torch.no_grad():
