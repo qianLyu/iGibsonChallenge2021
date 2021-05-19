@@ -157,7 +157,7 @@ class TrainedAgent:
         self.index += 1
         frame = observations_to_image(observations)
         root = f'/nethome/qluo49/iGibsonChallenge2021/pictures/{self.index}.png'
-        #mp.imsave(root,frame)
+        mp.imsave(root,frame)
 
         batch = defaultdict(list)
         #print(state)
@@ -173,18 +173,18 @@ class TrainedAgent:
         # if self.index % 10 != 0:
         #     action = self.prev_actions
 
-        else:
-            with torch.no_grad():
-                # Get new action and LSTM hidden state
-                _, action, _, self.test_recurrent_hidden_states = self.model.act(
-                    batch,
-                    self.test_recurrent_hidden_states,
-                    self.prev_actions,
-                    self.not_done_masks,
-                    deterministic=True,
-                )
+        # else:
+        with torch.no_grad():
+            # Get new action and LSTM hidden state
+            _, action, _, self.test_recurrent_hidden_states = self.model.act(
+                batch,
+                self.test_recurrent_hidden_states,
+                self.prev_actions,
+                self.not_done_masks,
+                deterministic=True,
+            )
 
-            self.prev_actions.copy_(action)
+        self.prev_actions.copy_(action)
 
         # gaussian action space
         move_amount = -torch.tanh(action[0][0]).item()
