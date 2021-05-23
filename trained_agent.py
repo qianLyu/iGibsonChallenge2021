@@ -44,7 +44,7 @@ import matplotlib.image as mp
 
 
 # WEIGHTS_PATH = 'habitat_cont_2/habitat_cont/gaussian_noslide_30deg_63_skyfail.json'
-WEIGHTS_PATH = '/nethome/qluo49/iGibsonChallenge2021/ckpt.8.json'
+WEIGHTS_PATH = '/nethome/qluo49/iGibsonChallenge2021/ckpt.9.json'
 
 def load_model(weights_path, dim_actions): # DON'T CHANGE
     depth_256_space = SpaceDict({
