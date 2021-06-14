@@ -157,7 +157,7 @@ class TrainedAgent:
         self.index += 1
         frame = observations_to_image(observations)
         root = f'/nethome/qluo49/iGibsonChallenge2021/pictures/{self.index}.png'
-        #mp.imsave(root,frame)
+        mp.imsave(root,frame)
 
         batch = defaultdict(list)
         #print(state)
