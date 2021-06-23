@@ -1,6 +1,6 @@
 # scene
 scene: igibson
-scene_id: Rs_int
+scene_id: Beechwood_1_int #Rs_int
 load_scene_episode_config: false
 scene_episode_config_name: null
 build_graph: true
