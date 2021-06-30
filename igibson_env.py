@@ -718,10 +718,10 @@ if __name__ == '__main__':
             state['pointgoal_with_gps_compass'] = state1['task_obs'][:2]
             state = [state]
 
-            index += 1
-            frame = observations_to_image(state1)
-            root = f'/nethome/qluo49/iGibsonChallenge2021/pictures/{index}.png'
-            mp.imsave(root,frame)
+            # index += 1
+            # frame = observations_to_image(state1)
+            # root = f'/nethome/qluo49/iGibsonChallenge2021/pictures/{index}.png'
+            # mp.imsave(root,frame)
 
             batch = defaultdict(list)
             #print(state)
