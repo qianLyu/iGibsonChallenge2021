@@ -695,21 +695,22 @@ if __name__ == '__main__':
     # Will have to change this:
     #goal_location = np.array([float(goal_list_x[i]), float(goal_list_y[i]) ], dtype=np.float32)
 
-    test_recurrent_hidden_states = torch.zeros(
-        model.net.num_recurrent_layers,
-        num_processes,
-        512,
-        device=DEVICE,
-    )
-
-    prev_actions = torch.zeros(num_processes, 2, device=DEVICE)
-    not_done_masks = torch.zeros(num_processes, 1, device=DEVICE)
 
     for episode in range(30):
+        test_recurrent_hidden_states = torch.zeros(
+            model.net.num_recurrent_layers,
+            num_processes,
+            512,
+            device=DEVICE,
+        )
+
+        prev_actions = torch.zeros(num_processes, 2, device=DEVICE)
+        not_done_masks = torch.zeros(num_processes, 1, device=DEVICE)
+
         print('Episode: {}'.format(episode))
         start = time.time()
         state1 = env.reset()
-        for _ in range(400):  # 10 seconds
+        for _ in range(500):  # 10 seconds
             state = OrderedDict()
             state['depth'] = state1['depth']
             state['pointgoal_with_gps_compass'] = state1['task_obs'][:2]
@@ -759,12 +760,12 @@ if __name__ == '__main__':
             # action1 = np.array([ 0.25 * move_amount, 0.16 * turn_amount])
             # print(action1)
             state1, reward, done, _ = env.step(action1)
-            print('reward', reward)
-            print('dis', state1['task_obs'][:2])
 
             not_done_masks = torch.ones(num_processes, 1, device=DEVICE)
             if done:
                 break
+        # print('reward', reward)
+        print('dis', state1['task_obs'][:2])
         print('Episode finished after {} timesteps, took {} seconds.'.format(
             env.current_step, time.time() - start))
     env.close()
