@@ -695,6 +695,7 @@ if __name__ == '__main__':
     # Will have to change this:
     #goal_location = np.array([float(goal_list_x[i]), float(goal_list_y[i]) ], dtype=np.float32)
 
+    res = []
 
     for episode in range(30):
         test_recurrent_hidden_states = torch.zeros(
@@ -764,8 +765,11 @@ if __name__ == '__main__':
             not_done_masks = torch.ones(num_processes, 1, device=DEVICE)
             if done:
                 break
+        res.append(state1['task_obs'][:2])
         # print('reward', reward)
-        print('dis', state1['task_obs'][:2])
-        print('Episode finished after {} timesteps, took {} seconds.'.format(
-            env.current_step, time.time() - start))
+        # print('dis', state1['task_obs'][:2])
+        # print('Episode finished after {} timesteps, took {} seconds.'.format(
+        #     env.current_step, time.time() - start))
+    for m in range(30):
+        print(m, res[m])
     env.close()
