@@ -114,6 +114,18 @@ def observations_to_image(observation):
         observation_size = observation["rgb"].shape[0]
         egocentric_view.append(observation["rgb"][:, :, :3])
 
+    # if "depth" in observation:
+    #     observation_size = observation["depth"].shape[0]
+    #     depth_map = (observation["depth"].squeeze() * 255).astype(np.uint8)
+    #     depth_map = np.stack([depth_map for _ in range(3)], axis=2)
+    #     egocentric_view.append(depth_map)
+
+    egocentric_view = np.concatenate(egocentric_view, axis=1)
+
+    frame = egocentric_view
+
+    return frame
+
 # WEIGHTS_PATH = '/coc/pskynet3/nyokoyama3/aug26/hablabhotswap/gaussian_noslide_30deg_63_skyfail.json'
 
 # def load_model(weights_path, dim_actions): # DON'T CHANGE
