@@ -39,6 +39,24 @@ import cv2
 import os
 import subprocess
 import yaml
+from cv2 import VideoWriter, VideoWriter_fourcc, imread, resize
+
+
+def Pic2Video(imgPath, videoPath):
+ 
+    images = os.listdir(imgPath)
+    fps = 10  
+ 
+    fourcc = VideoWriter_fourcc(*"XVID")
+ 
+    image = Image.open(imgPath + images[0])
+    videoWriter = cv2.VideoWriter(videoPath, fourcc, fps, image.size)
+    for im_name in range(len(images)):
+        frame = cv2.imread(imgPath + f'{im_name+1}.png')  
+        videoWriter.write(frame)
+
+    videoWriter.release()
+    cv2.destroyAllWindows()
 DEVICE = torch.device("cuda")
 
 WEIGHTS_PATH = '/nethome/qluo49/iGibsonChallenge2021/ckpt.9.json'
@@ -699,6 +717,10 @@ if __name__ == '__main__':
     res = []
 
     for episode in range(30):
+        index = 0
+        path = f'/nethome/qluo49/iGibsonChallenge2021/picture_{episode}/'
+        if not os.path.exists(path):
+            os.makedirs(path)
         test_recurrent_hidden_states = torch.zeros(
             model.net.num_recurrent_layers,
             num_processes,
@@ -718,10 +740,10 @@ if __name__ == '__main__':
             state['pointgoal_with_gps_compass'] = state1['task_obs'][:2]
             state = [state]
 
-            # index += 1
-            # frame = observations_to_image(state1)
-            # root = f'/nethome/qluo49/iGibsonChallenge2021/pictures/{index}.png'
-            # mp.imsave(root,frame)
+            index += 1
+            frame = observations_to_image(state1)
+            root = f'/nethome/qluo49/iGibsonChallenge2021/picture_{episode}/{index}.png'
+            mp.imsave(root,frame)
 
             batch = defaultdict(list)
             #print(state)
@@ -777,6 +799,9 @@ if __name__ == '__main__':
         # print('dis', state1['task_obs'][:2])
         # print('Episode finished after {} timesteps, took {} seconds.'.format(
         #     env.current_step, time.time() - start))
+        
+        videoPath = f'/nethome/qluo49/iGibsonChallenge2021/videos/{res[-1][0]}.avi' 
+        Pic2Video(path, videoPath) 
     for m in range(30):
         print(m, res[m])
     env.close()
