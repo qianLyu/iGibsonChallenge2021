@@ -620,7 +620,7 @@ class iGibsonEnv(BaseEnv):
 
         land_success = False
         # land for maximum 1 second, should fall down ~5 meters
-        max_simulator_step = int(1.0 / self.action_timestep)
+        max_simulator_step = 6 * int(1.0 / self.action_timestep)
         for _ in range(max_simulator_step):
             self.simulator_step()
             if len(p.getContactPoints(bodyA=body_id)) > 0:
