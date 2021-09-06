@@ -86,7 +86,7 @@ def load_model(weights_path, dim_actions): # DON'T CHANGE
         hidden_size=512,
         rnn_type='LSTM',
         num_recurrent_layers=2,
-        backbone='resnet50',
+        backbone='resnet18',
         normalize_visual_inputs=False,
         action_distribution=action_distribution,
         dim_actions=dim_actions
