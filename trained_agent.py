@@ -48,7 +48,7 @@ WEIGHTS_PATH = '/nethome/qluo49/iGibsonChallenge2021/ckpt.36.json'
 
 def load_model(weights_path, dim_actions): # DON'T CHANGE
     depth_256_space = SpaceDict({
-        'depth': spaces.Box(low=0., high=1., shape=(180,320,1)),
+        'depth': spaces.Box(low=0., high=1., shape=(240,320,1)),
         'pointgoal_with_gps_compass': spaces.Box(
             low=np.finfo(np.float32).min,
             high=np.finfo(np.float32).max,
@@ -71,7 +71,7 @@ def load_model(weights_path, dim_actions): # DON'T CHANGE
         hidden_size=512,
         rnn_type='LSTM',
         num_recurrent_layers=2,
-        backbone='resnet50',
+        backbone='resnet18',
         normalize_visual_inputs=False,
         action_distribution=action_distribution,
         dim_actions=dim_actions
@@ -155,9 +155,9 @@ class TrainedAgent:
         self.state = [self.state]
 
         self.index += 1
-        frame = observations_to_image(observations)
-        root = f'/nethome/qluo49/iGibsonChallenge2021/pictures/{self.index}.png'
-        mp.imsave(root,frame)
+        # frame = observations_to_image(observations)
+        # root = f'/nethome/qluo49/iGibsonChallenge2021/pictures/{self.index}.png'
+        # mp.imsave(root,frame)
 
         batch = defaultdict(list)
         #print(state)
@@ -228,8 +228,8 @@ class TrainedAgent:
 
 if __name__ == "__main__":
     obs = {
-        'depth': np.ones((180, 320, 1)),
-        'rgb': np.ones((180, 320, 3)),
+        'depth': np.ones((240, 320, 1)),
+        'rgb': np.ones((240, 320, 3)),
         'sensor': np.ones((2,))
     }
 
