@@ -3,7 +3,7 @@ from collections import OrderedDict
 import json
 import os
 
-PTH_PATH = '/home/qian/Desktop/ckpt.9.pth'
+PTH_PATH = '/coc/testnvme/nyokoyama3/fair/icra/exp/ppl_ng_rc/checkpoints/4_seed1/ckpt.36.pth'
 
 print('Loading model...')
 state_dict = torch.load(
