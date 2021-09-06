@@ -83,10 +83,10 @@ def load_model(weights_path, dim_actions): # DON'T CHANGE
     model = PointNavResNetPolicy(
         observation_space=depth_256_space,
         action_space=action_space,
-        hidden_size=228, #512,
+        hidden_size=512, #512,
         rnn_type='LSTM',
         num_recurrent_layers=2,
-        backbone='resnet18',
+        backbone='resnet50',
         normalize_visual_inputs=False,
         action_distribution=action_distribution,
         dim_actions=dim_actions
