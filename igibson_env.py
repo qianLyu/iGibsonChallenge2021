@@ -59,7 +59,7 @@ def Pic2Video(imgPath, videoPath):
     cv2.destroyAllWindows()
 DEVICE = torch.device("cuda")
 
-WEIGHTS_PATH = '/nethome/qluo49/iGibsonChallenge2021/ckpt.9.json'
+WEIGHTS_PATH = '/nethome/qluo49/iGibsonChallenge2021/ckpt.36.json'
 
 def load_model(weights_path, dim_actions): # DON'T CHANGE
     depth_256_space = SpaceDict({
@@ -86,7 +86,7 @@ def load_model(weights_path, dim_actions): # DON'T CHANGE
         hidden_size=512,
         rnn_type='LSTM',
         num_recurrent_layers=2,
-        backbone='resnet18',
+        backbone='resnet50',
         normalize_visual_inputs=False,
         action_distribution=action_distribution,
         dim_actions=dim_actions
@@ -728,11 +728,11 @@ if __name__ == '__main__':
 
     res = []
 
-    for episode in range(30):
+    for episode in range(10):
         index = 0
-        path = f'/nethome/qluo49/iGibsonChallenge2021/picture_{episode}/'
-        if not os.path.exists(path):
-            os.makedirs(path)
+        # path = f'/nethome/qluo49/iGibsonChallenge2021/picture_{episode}/'
+        # if not os.path.exists(path):
+        #     os.makedirs(path)
         test_recurrent_hidden_states = torch.zeros(
             model.net.num_recurrent_layers,
             num_processes,
@@ -753,9 +753,9 @@ if __name__ == '__main__':
             state = [state]
 
             index += 1
-            frame = observations_to_image(state1)
-            root = f'/nethome/qluo49/iGibsonChallenge2021/picture_{episode}/{index}.png'
-            mp.imsave(root,frame)
+            # frame = observations_to_image(state1)
+            # root = f'/nethome/qluo49/iGibsonChallenge2021/picture_{episode}/{index}.png'
+            # mp.imsave(root,frame)
 
             batch = defaultdict(list)
             #print(state)
@@ -806,14 +806,14 @@ if __name__ == '__main__':
             not_done_masks = torch.ones(num_processes, 1, device=DEVICE)
             if done:
                 break
-        res.append(state1['task_obs'][:2])
+        # res.append(state1['task_obs'][:2])
         # print('reward', reward)
         # print('dis', state1['task_obs'][:2])
         # print('Episode finished after {} timesteps, took {} seconds.'.format(
         #     env.current_step, time.time() - start))
         
-        videoPath = f'/nethome/qluo49/iGibsonChallenge2021/videos/{res[-1][0]}.avi' 
-        Pic2Video(path, videoPath) 
-    for m in range(30):
-        print(m, res[m])
+        # videoPath = f'/nethome/qluo49/iGibsonChallenge2021/videos/{res[-1][0]}.avi' 
+        # Pic2Video(path, videoPath) 
+    # for m in range(30):
+    #     print(m, res[m])
     env.close()
