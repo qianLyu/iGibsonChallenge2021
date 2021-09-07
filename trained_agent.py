@@ -188,7 +188,7 @@ class TrainedAgent:
 
         # gaussian action space
         move_amount = torch.clip(action[0][0], min=-1, max=1).item()
-        turn_amount = torch.clip(action[0][1], min=-1, max=1).item()
+        turn_amount = torch.clip(action[0][1], min=-1, max=1).item() * 0.5
         move_amount = (move_amount+1.)/4.
         # move_amount = -torch.tanh(action[0][0]).item()
         # turn_amount = torch.tanh(action[0][1]).item()
