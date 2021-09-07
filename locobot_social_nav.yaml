@@ -1,6 +1,6 @@
 # scene
 scene: igibson
-scene_id: Beechwood_1_int #Rs_int
+scene_id: Rs_int #Beechwood_1_int
 load_scene_episode_config: false
 scene_episode_config_name: null
 build_graph: true
@@ -62,8 +62,8 @@ fisheye: false
 # image_width: 320
 # image_height: 180
 # vertical_fov: 42.5
-image_width: 320
-image_height: 180
+image_width: 320 #320
+image_height: 240 #180
 vertical_fov: 42.5 #69.4
 # depth
 # depth_low : 0.1
