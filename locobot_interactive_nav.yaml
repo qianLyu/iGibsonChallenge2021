@@ -27,7 +27,7 @@ angular_velocity: 1.5707963267948966
 
 # task
 task: interactive_nav_random
-target_dist_min: 0.0 #1.0
+target_dist_min: 1.0 #1.0
 target_dist_max: 10.0
 goal_format: polar
 task_obs_dim: 4
